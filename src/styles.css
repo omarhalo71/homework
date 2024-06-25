@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: black;
+}
+
+mat-card {
+  width: 400px;
+  padding: 20px;
+  margin: 20px;
+  color:lime;
+  background-color: blueviolet;
+}

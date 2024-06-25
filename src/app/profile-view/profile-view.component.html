@@ -1,0 +1,16 @@
+<div class="container">
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Profile View</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>Name:</strong> {{ profile.name }}</p>
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+    <p><strong>Phone:</strong> {{ profile.phone }}</p>
+    <p><strong>Address:</strong> {{ profile.address }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="editProfile()">Edit</button>
+  </mat-card-actions>
+</mat-card>
+</div>

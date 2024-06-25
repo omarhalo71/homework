@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: black;
+}
+
+mat-card {
+  width: auto;
+  padding: 20px;
+  margin: 20px;
+  color: lime;
+  background-color: blueviolet !important;
+font-size: 40px;
+}

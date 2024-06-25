@@ -1,0 +1,28 @@
+<div class="container">
+<mat-card>
+
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput name="name" [(ngModel)]="profile.name" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput name="email" [(ngModel)]="profile.email" required email>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Phone</mat-label>
+      <input matInput name="phone" [(ngModel)]="profile.phone" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Address</mat-label>
+      <input matInput name="address" [(ngModel)]="profile.address" required>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Save</button>
+  </form>
+</mat-card>
+</div>
