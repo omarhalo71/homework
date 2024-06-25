@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProfileService } from '../profile.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-edit-reactive',
@@ -9,21 +11,35 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProfileEditReactiveComponent implements OnInit {
   profileForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private profileService: ProfileService,
+    private router: Router
+  ) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
-      address: ['', Validators.required]
+      phone: [''],
+      address: ['']
     });
   }
 
   ngOnInit(): void {
+    this.loadProfile();
   }
 
-  onSubmit(): void {
+  loadProfile(): void {
+    this.profileService.getProfile().subscribe(profile => {
+      this.profileForm.patchValue(profile);
+    });
+  }
+
+  save(): void {
     if (this.profileForm.valid) {
-      console.log(this.profileForm.value);
+      this.profileService.updateProfile(this.profileForm.value).subscribe(() => {
+        alert('Profile updated successfully!');
+        this.router.navigate(['/profile']);
+      });
     }
   }
 }
