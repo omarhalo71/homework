@@ -7,12 +7,12 @@ import { Profile } from './profile';
   providedIn: 'root'
 })
 export class ProfileService {
-  private apiUrl = 'api/profile';  // URL to web api
+  private apiUrl = 'api/profiles';  // URL to web api
 
   constructor(private http: HttpClient) { }
 
-  getProfile(): Observable<Profile> {
-    return this.http.get<Profile>(this.apiUrl);
+  getProfiles(): Observable<Profile[]> {
+    return this.http.get<Profile[]>(this.apiUrl);
   }
 
   updateProfile(profile: Profile): Observable<any> {

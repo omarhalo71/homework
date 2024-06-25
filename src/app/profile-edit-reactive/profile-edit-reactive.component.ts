@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../profile.service';
-import { Router } from '@angular/router';
+import { Profile } from '../profile';
 
 @Component({
   selector: 'app-profile-edit-reactive',
@@ -10,36 +10,37 @@ import { Router } from '@angular/router';
 })
 export class ProfileEditReactiveComponent implements OnInit {
   profileForm: FormGroup;
+  profile: Profile;
 
   constructor(
     private fb: FormBuilder,
-    private profileService: ProfileService,
-    private router: Router
+    private profileService: ProfileService
   ) {
-    this.profileForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: [''],
-      address: ['']
-    });
+    this.createForm();
   }
 
   ngOnInit(): void {
-    this.loadProfile();
+    this.getProfile();
   }
 
-  loadProfile(): void {
-    this.profileService.getProfile().subscribe(profile => {
-      this.profileForm.patchValue(profile);
+  createForm() {
+    this.profileForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      address: ['', Validators.required]
+    });
+  }
+
+  getProfile(): void {
+    this.profileService.getProfiles().subscribe(profiles => {
+      this.profile = profiles[0];
+      this.profileForm.patchValue(this.profile);
     });
   }
 
   save(): void {
-    if (this.profileForm.valid) {
-      this.profileService.updateProfile(this.profileForm.value).subscribe(() => {
-        alert('Profile updated successfully!');
-        this.router.navigate(['/profile']);
-      });
-    }
+    this.profile = this.profileForm.value;
+    this.profileService.updateProfile(this.profile).subscribe();
   }
 }
